@@ -1,0 +1,31 @@
+server:
+  port: 8080
+  timeout: 30s
+  allow_cors: true
+  allowed_origins: ["*"]
+  cookie:
+    secure: true
+    http_only: true
+    same_site: Strict
+
+framework: gin
+
+middlewares:
+  global: [logging]
+
+routes:
+  groups:
+    - base: /api/v1
+      routes:
+        - path: /get-user
+          handler: getUserData
+          method: GET
+        - path: /userpost
+          handler: createUserPost
+          method: POST
+          body_params:
+            required:
+              - name: username
+                type: int
+              - name: phonenumber
+                type: string
